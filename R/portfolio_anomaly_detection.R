@@ -1,11 +1,15 @@
-
 library(RobinHood)
 library(tidyverse)
 library(anomalize)
 library(plotly)
 
+#install.packages("RobinHood")
+#devtools::install_github("jestonblu/RobinHood")
 
-RH = RobinHood(username = Sys.getenv("personal_email"), password = Sys.getenv("robinhood_password"))
+RH = RobinHood(
+  username = Sys.getenv("personal_email"), 
+  password = Sys.getenv("robinhood_password"),
+  mfa_code = "784354")
 
 portfolio <- get_portfolios(RH, interval = "day", span = "3month")
 
@@ -21,7 +25,7 @@ positions <- get_positions(RH)
 crypto_positions <- get_positions_crypto(RH)
 
 positions_trends <- positions %>%
-  mutate(trends = map(symbol, get_historicals, RH = RH, "day", "year")) %>%
+  mutate(trends = map(symbol, get_historicals, RH = RH, "day", "2year")) %>%
   unnest(cols = c(trends))
 
 plot_positions <- positions_trends %>%
@@ -41,3 +45,4 @@ analyzed_trends <- positions_trends %>%
   plot_anomalies(time_recomposed = TRUE, ncol = 3, alpha_dots = 0.25) +
   labs(title = "Portfolio Anomalies", subtitle = "STL + GESD Methods") 
 
+analyzed_trends
