@@ -3,8 +3,8 @@ library(tidyverse)
 library(anomalize)
 library(plotly)
 
-#install.packages("RobinHood")
-#devtools::install_github("jestonblu/RobinHood")
+install.packages("anomalize")
+devtools::install_github("jestonblu/RobinHood")
 
 RH = RobinHood(
   username = Sys.getenv("personal_email"), 

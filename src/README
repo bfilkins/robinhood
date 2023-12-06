@@ -1,0 +1,9 @@
+Outline of scnerario planning tools first constraints.
+
+- trades every weekday
+- starts with $10k
+- dividends reinvested following day
+- 15 stocks max (for now, need to think this through)
+
+first trade logic
+start with random distributions of the cash, write algorithm to correct gradually overtime
